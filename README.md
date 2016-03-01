@@ -18,7 +18,7 @@ assertTrue(JLogic.eval(e));
 assertEquals("foo _and_ bar2", JLogic.explain(e, true));
 ```
 
-Classes CanFoo, CanFoo2 and CanBar2 represent specific business rules, all necessary parameters are provided at the in the constructor. In our simple demo, they receive only one parameter, that states weather the should succeed or fail. Here is the implementation of CanFoo:
+Classes CanFoo, CanFoo2 and CanBar2 represent specific business rules, all necessary parameters are provided at the in the constructor. In our simple demo, they receive only one parameter, that states whether they should succeed or fail. Here is the implementation of CanFoo:
 
 ```java
 public class CanFoo implements Expression {
@@ -35,6 +35,17 @@ public class CanFoo implements Expression {
 	public String explain(boolean result) {
 		return JLogic.explain("foo", result);
 	}
+}
+```
+
+A false situation and a true one may be expressed different ways. JLogic.explain is a very simple function that prefixes the first parameter with "_not_" when explaining a false result. Of course, you can write your own explanations.
+
+```java
+public static String explain(String explanation, boolean result) {
+	if (result)
+		return explanation;
+	else
+		return NOT + explanation;
 }
 ```
 
