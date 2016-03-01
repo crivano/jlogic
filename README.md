@@ -12,10 +12,30 @@ Example / Usage
 A basic propositional expression is built out of the types `And`, `Or` and `Not`.  All of these extend the base type Expression.  For example,
 
 ```java
-	Expression e = And.of(new CanFoo(true),
-			Or.of(new CanFoo2(false), new CanBar2(true)));
-	assertTrue(JLogic.eval(e));
-	assertEquals("foo _and_ bar2", JLogic.explain(e, true));
+Expression e = And.of(new CanFoo(true),
+		Or.of(new CanFoo2(false), new CanBar2(true)));
+assertTrue(JLogic.eval(e));
+assertEquals("foo _and_ bar2", JLogic.explain(e, true));
+```
+
+Classes CanFoo, CanFoo2 and CanBar2 represent specific business rules, all necessary parameters are provided at the in the constructor. In our simple demo, they receive only one parameter, that states weather the should succeed or fail. Here is the implementation of CanFoo:
+
+```java
+public class CanFoo implements Expression {
+	boolean b;
+
+	public CanFoo(boolean b) {
+		this.b = b;
+	}
+
+	public boolean eval() {
+		return this.b;
+	}
+
+	public String explain(boolean result) {
+		return JLogic.explain("foo", result);
+	}
+}
 ```
 
 Building
