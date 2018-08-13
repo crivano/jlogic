@@ -11,7 +11,6 @@ public class And implements Expression {
 		return new And(expressions);
 	}
 
-	@Override
 	public boolean eval() {
 		for (Expression expression : expressions) {
 			if (!expression.eval())
@@ -20,7 +19,6 @@ public class And implements Expression {
 		return true;
 	}
 
-	@Override
 	public String explain(boolean result) {
 		if (result) {
 			StringBuilder sb = new StringBuilder();

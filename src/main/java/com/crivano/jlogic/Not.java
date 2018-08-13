@@ -11,12 +11,10 @@ public class Not implements Expression {
 		return new Not(expression);
 	}
 
-	@Override
 	public boolean eval() {
 		return !expression.eval();
 	}
 
-	@Override
 	public String explain(boolean result) {
 		return expression.explain(!result);
 	}

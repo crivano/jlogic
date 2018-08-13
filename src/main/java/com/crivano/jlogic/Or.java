@@ -11,7 +11,6 @@ public class Or implements Expression {
 		return new Or(expressions);
 	}
 
-	@Override
 	public boolean eval() {
 		for (Expression expression : expressions) {
 			if (expression.eval())
@@ -20,7 +19,6 @@ public class Or implements Expression {
 		return false;
 	}
 
-	@Override
 	public String explain(boolean result) {
 		if (result) {
 			for (Expression expression : expressions)
