@@ -1,6 +1,6 @@
 package com.crivano.jlogic;
 
-public abstract class CompositeExpressionSuport implements Expression {
+public abstract class CompositeExpressionSupport implements Expression {
 	private Expression exp = null;
 
 	public boolean eval() {
