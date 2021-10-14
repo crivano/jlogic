@@ -4,7 +4,7 @@
 
 	<groupId>com.crivano</groupId>
 	<artifactId>jlogic</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 	<name>JLogic</name>
 	<description>Java boolean expression evaluation and explanation</description>
 	<packaging>jar</packaging>
