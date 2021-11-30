@@ -124,6 +124,27 @@ public class JLogicTest {
 		assertEquals("bar2", JLogic.explain(e, false));
 	}
 
+	@Test
+	public void test1IfInner0FailInner0FailAtSecond() {
+		Expression e = If.of(new CanFoo(true), inner0Or0(), inner0Or0());
+		assertFalse(JLogic.eval(e));
+		assertEquals("_not_ foo2 _and_ _not_ bar2 _and_ foo", JLogic.explain(e, false));
+	}
+
+	@Test
+	public void test0IfInner0FailInner0FailAtSecond() {
+		Expression e = If.of(new CanFoo(false), inner0Or0(), inner0Or0());
+		assertFalse(JLogic.eval(e));
+		assertEquals("_not_ foo _and_ _not_ foo2 _and_ _not_ bar2", JLogic.explain(e, false));
+	}
+
+	@Test
+	public void test1IfInner0Or1Inner0SucceedAtSecond() {
+		Expression e = If.of(new CanFoo(true), inner0Or1(), inner0Or0());
+		assertTrue(JLogic.eval(e));
+		assertEquals("foo _and_ bar2", JLogic.explain(e, true));
+	}
+
 	private Expression inner0Or0() {
 		return Or.of(new CanFoo2(false), new CanBar2(false));
 	}
