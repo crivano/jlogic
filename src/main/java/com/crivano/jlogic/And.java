@@ -1,7 +1,7 @@
 package com.crivano.jlogic;
 
 public class And implements Expression {
-	Expression[] expressions;
+	private Expression[] expressions;
 
 	public And(Expression... expressions) {
 		this.expressions = expressions;
@@ -12,7 +12,7 @@ public class And implements Expression {
 	}
 
 	public boolean eval() {
-		for (Expression expression : expressions) {
+		for (Expression expression : getExpressions()) {
 			if (!expression.eval())
 				return false;
 		}
@@ -22,7 +22,7 @@ public class And implements Expression {
 	public String explain(boolean result) {
 		if (result) {
 			StringBuilder sb = new StringBuilder();
-			for (Expression expression : expressions) {
+			for (Expression expression : getExpressions()) {
 				if (expression.eval())
 					if (sb.length() != 0)
 						sb.append(JLogic.AND);
@@ -32,7 +32,7 @@ public class And implements Expression {
 				return null;
 			return sb.toString();
 		} else {
-			for (Expression expression : expressions) {
+			for (Expression expression : getExpressions()) {
 				if (!expression.eval())
 					return expression.explain(false);
 			}
@@ -40,4 +40,7 @@ public class And implements Expression {
 		}
 	}
 
+	public Expression[] getExpressions() {
+		return expressions;
+	}
 }

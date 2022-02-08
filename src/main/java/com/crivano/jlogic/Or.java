@@ -1,7 +1,7 @@
 package com.crivano.jlogic;
 
 public class Or implements Expression {
-	Expression[] expressions;
+	private Expression[] expressions;
 
 	public Or(Expression... expressions) {
 		this.expressions = expressions;
@@ -40,4 +40,7 @@ public class Or implements Expression {
 		}
 	}
 
+	public Expression[] getExpressions() {
+		return expressions;
+	}
 }
