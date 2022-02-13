@@ -93,33 +93,36 @@ public class JLogicCircuit {
 
 		int posy = 0;
 		for (char[][] sub : subs) {
+			boolean lastSub = sub == subs.get(subs.size() - 1);
+			int cySub = sub[0].length;
+			int cxSub = sub.length;
 			// draw subexpressions at their positions
-			for (int y = 0; y < sub[0].length; y++) {
-				for (int x = 0; x < sub.length; x++)
+			for (int y = 0; y < cySub; y++) {
+				for (int x = 0; x < cxSub; x++)
 					r[x + 1][posy + y] = sub[x][y];
 			}
 			// fill each item to cx
-			for (int x = sub.length + 1; x < cx - 1; x++)
+			for (int x = cxSub + 1; x < cx - 1; x++)
 				r[x][posy] = '━';
 			// draw borders
-			for (int y = posy; y < posy + sub[0].length; y++) {
+			for (int y = posy; y < posy + cySub; y++) {
 				if (y == 0) {
 					r[0][0] = '┳';
 					r[cx - 1][0] = '┳';
-				} else if (y == posy && y < cy - 1) {
+				} else if (y == posy && lastSub) {
+					r[0][y] = '┗';
+					r[cx - 1][y] = '┛';
+				} else if (y == posy && !lastSub) {
 					r[0][y] = '┣';
 					r[cx - 1][y] = '┫';
-				} else if (y > posy && y < cy - 1) {
+				} else if (y > posy && !lastSub) {
 					r[0][y] = '┃';
 					r[cx - 1][y] = '┃';
-				} else if (y == cy - 1) {
-					r[0][cy - 1] = '┗';
-					r[cx - 1][cy - 1] = '┛';
 				}
 
 			}
 
-			posy += sub[0].length;
+			posy += cySub;
 		}
 		return r;
 	}

@@ -65,12 +65,23 @@ public class JLogicCircuitTest {
 	}
 
 	@Test
-	public void test2Or2OrSucceed() {
+	public void testOrOfOrAndSucceed() {
 		Expression e = Or.of(And.of(Or.of(new CanFoo(true), new CanBar(true)), new CanBar2(true)), new CanFoo2(true));
 		String s = "";
 		s += "┳┳foo┳━bar2┳\n";
 		s += "┃┗bar┛     ┃\n";
 		s += "┗foo2━━━━━━┛";
+
+		assertEquals(s, JLogicCircuit.draw(e));
+	}
+
+	@Test
+	public void testOrOfAndOrSucceed() {
+		Expression e = Or.of(new CanFoo2(true), And.of(Or.of(new CanFoo(true), new CanBar(true)), new CanBar2(true)));
+		String s = "";
+		s += "┳foo2━━━━━━┳\n";
+		s += "┗┳foo┳━bar2┛\n";
+		s += " ┗bar┛      ";
 
 		assertEquals(s, JLogicCircuit.draw(e));
 	}
